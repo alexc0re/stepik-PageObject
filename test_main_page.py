@@ -1,10 +1,9 @@
-from selenium.webdriver.common.by import By
-import time
-
-def test_button_visibility(browser):
-    browser.get('http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/')
-    time.sleep(10)
-    assert browser.find_element(By.CSS_SELECTOR, '.btn.2btn-lg.btn-primary.btn-add-to-basket').is_displayed(), \
-        ' No button found'
+from pages.main_page import MainPage
+from pages.base_page import BasePage
 
 
+def test_guest_can_go_to_login_page(browser):
+    link = "http://selenium1py.pythonanywhere.com/"
+    page = MainPage(browser, link)   # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес
+    page.open_link()                      # открываем страницу
+    page.go_to_login_page()
