@@ -9,18 +9,25 @@ options = Options()
 
 
 def pytest_addoption(parser):
-    parser.addoption('--language', action='store', default='en',
+    parser.addoption('--language', action='store', default='en',  ## Browser Language selection
                      help="Choose language: en or es")
+
+
+    parser.addoption('--browsermode', action='store', default='start-maximized', ## Browser mode selection
+                     help="--headless mode")
 
 
 @pytest.fixture(scope="session")
 def browser(request):
+    browser_mode = request.config.getoption('browsermode')
     browser_lang = request.config.getoption("language")
     browser = None
     if browser_lang:
         print("\nstart ES chrome browser for test..")
+        options.add_argument(browser_mode)
         options.add_experimental_option('prefs', {'intl.accept_languages': browser_lang})
         browser = webdriver.Chrome(options=options, service=Service(ChromeDriverManager().install()))
+
 
 
     else:
