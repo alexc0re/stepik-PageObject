@@ -6,6 +6,8 @@ from pages.locators import LoginPageLocators
 class ProductPage(BasePage):
 
     def add_to_cart(self):
+
+
         assert True
 
     def find_and_click_btn(self):
@@ -39,10 +41,6 @@ class ProductPage(BasePage):
         assert self.is_disappeared(ProductPageLocators.SUCCESS_MESSAGE_ITEM),\
         "Element is active "
 
-    def test_guest_should_see_login_link_on_product_page(driver):
-        link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
-        page = ProductPage(driver, link)
-        page.open()
-        page.should_be_login_link()
+
 
 
