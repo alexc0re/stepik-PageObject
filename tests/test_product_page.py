@@ -1,6 +1,7 @@
 import time
 import pytest
 from pages.product_page import ProductPage
+from pages.main_page import MainPage
 from pages.base_page import BasePage
 
 
@@ -60,3 +61,13 @@ def test_guest_can_go_to_login_page_from_product_page(driver):
     base_page.open()
     base_page.should_be_login_link()
     product_page.find_and_click_login_button()
+
+
+def test_guest_cant_see_product_in_basket_opened_from_product_page(driver):
+    link = 'http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/'
+    base_page = BasePage(driver, link)
+    main_page = MainPage(driver, link)
+    base_page.open()
+    main_page.find_and_click_basket_button()
+    time.sleep(5)
+    assert 1 == 1

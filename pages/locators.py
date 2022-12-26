@@ -9,7 +9,7 @@ class BasePageLocators:
 
 class MainPageLocators:
     LOGIN_LINK = (By.CSS_SELECTOR, "#registration_link")
-    BASKET_BUTTON =(By.CSS_SELECTOR, ".btn-group .btn-default:first-child")
+    BASKET_BUTTON = (By.CSS_SELECTOR, ".btn-group .btn-default:first-child")
 
 
 class LoginPageLocators:
@@ -19,8 +19,12 @@ class LoginPageLocators:
 
 
 class ProductPageLocators:
-    ADD_TO_BASKET_BTN = (By.CSS_SELECTOR, '.btn-add-to-basket')
-    ITEM_NAME = (By.CSS_SELECTOR, '.col-sm-6 h1')
-    ITEM_PRICE = (By.CSS_SELECTOR, '.price_color')
-    SUCCESS_MESSAGE_ITEM = (By.CSS_SELECTOR, '.alert-success:nth-child(1) .alertinner strong')
-    SUCCESS_MESSAGE_PRICE = (By.CSS_SELECTOR, '.alert-info .alertinner p ')
+    ADD_TO_BASKET_BTN = (By.CSS_SELECTOR, ".btn-add-to-basket")
+    ITEM_NAME = (By.CSS_SELECTOR, ".col-sm-6 h1")
+    ITEM_PRICE = (By.CSS_SELECTOR, ".price_color")
+    SUCCESS_MESSAGE_ITEM = (By.CSS_SELECTOR, ".alert-success:nth-child(1) .alertinner strong")
+    SUCCESS_MESSAGE_PRICE = (By.CSS_SELECTOR, ".alert-info .alertinner p ")
+
+
+class BasketPageLocators:
+    EMPTY_BASKET = (By.CSS_SELECTOR, ".btn.btn-lg")
