@@ -52,3 +52,11 @@ def test_guest_should_see_login_link_on_product_page(driver):
     page = BasePage(driver, link)
     page.open()
     page.should_be_login_link()
+
+def test_guest_can_go_to_login_page_from_product_page(driver):
+    link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
+    base_page = BasePage(driver, link)
+    product_page = ProductPage(driver, link)
+    base_page.open()
+    base_page.should_be_login_link()
+    product_page.find_and_click_login_button()

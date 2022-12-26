@@ -1,5 +1,6 @@
 from pages.base_page import BasePage
 from pages.locators import ProductPageLocators
+from pages.locators import LoginPageLocators
 
 
 class ProductPage(BasePage):
@@ -10,6 +11,11 @@ class ProductPage(BasePage):
     def find_and_click_btn(self):
         self.is_element_present(*ProductPageLocators.ADD_TO_BASKET_BTN)
         self.click_on_elem(*ProductPageLocators.ADD_TO_BASKET_BTN)
+
+
+    def find_and_click_login_button(self):
+        self.is_element_present(*LoginPageLocators.LOGIN_LINK)
+        self.click_on_elem(*LoginPageLocators.LOGIN_LINK)
 
     def get_success_message_text(self):
         item_message = self.get_text(*ProductPageLocators.SUCCESS_MESSAGE_ITEM)
@@ -38,4 +44,5 @@ class ProductPage(BasePage):
         page = ProductPage(driver, link)
         page.open()
         page.should_be_login_link()
+
 
