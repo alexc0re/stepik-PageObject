@@ -24,3 +24,18 @@ class ProductPage(BasePage):
 
         assert item_name == item_msg, f'{item_name} is not in : {item_msg}'
         assert item_price in price_msg, f'{item_name} is not in : {item_msg}'
+
+    def should_not_be_success_message(self):
+        assert self.is_not_element_present(*ProductPageLocators.SUCCESS_MESSAGE_ITEM), \
+            "Success message is presented, but should not be"
+
+    def should_be_dissapeares(self):
+        assert self.is_disappeared(ProductPageLocators.SUCCESS_MESSAGE_ITEM),\
+        "Element is active "
+
+    def test_guest_should_see_login_link_on_product_page(driver):
+        link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
+        page = ProductPage(driver, link)
+        page.open()
+        page.should_be_login_link()
+

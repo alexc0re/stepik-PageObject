@@ -10,7 +10,7 @@ class LoginPage(BasePage):
 
     def should_be_login_url(self):
         self.is_element_present(LoginPageLocators.LOGIN_LINK)
-        assert 'login' in self.browser.current_url
+        assert 'login' in self.driver.current_url
 
     def should_be_login_form(self):
         self.is_element_present(LoginPageLocators.LOGIN_FORM)
