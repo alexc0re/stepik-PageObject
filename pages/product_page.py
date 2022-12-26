@@ -38,7 +38,7 @@ class ProductPage(BasePage):
             "Success message is presented, but should not be"
 
     def should_be_dissapeares(self):
-        assert self.is_disappeared(ProductPageLocators.SUCCESS_MESSAGE_ITEM),\
+         self.is_disappeared(*ProductPageLocators.SUCCESS_MESSAGE_ITEM),\
         "Element is active "
 
 

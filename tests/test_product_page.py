@@ -3,6 +3,7 @@ import pytest
 from pages.product_page import ProductPage
 from pages.main_page import MainPage
 from pages.base_page import BasePage
+from pages.basket_page import BasketPage
 
 
 @pytest.mark.parametrize('link', ["http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer0",
@@ -27,7 +28,7 @@ def test_guest_can_add_product_to_basket(driver, link):
     page.check_adding_to_basket()
 
 
-
+@pytest.mark.xfail
 def test_guest_cant_see_success_message_after_adding_product_to_basket(driver):
     link = 'https://selenium1py.pythonanywhere.com/ru/catalogue/hacking-exposed-wireless_208/'
     page = ProductPage(driver, link)
@@ -67,7 +68,7 @@ def test_guest_cant_see_product_in_basket_opened_from_product_page(driver):
     link = 'http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/'
     base_page = BasePage(driver, link)
     main_page = MainPage(driver, link)
+    basket_page = BasketPage(driver, link)
     base_page.open()
-    main_page.find_and_click_basket_button()
-    time.sleep(5)
-    assert 1 == 1
+    basket_page.go_to_basket()
+

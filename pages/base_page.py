@@ -4,8 +4,6 @@ from selenium.webdriver.support import expected_conditions as ec
 import math
 from pages.locators import BasePageLocators
 from selenium.webdriver.support.wait import WebDriverWait
-
-
 class BasePage:
 
     def __init__(self, driver, url, timeout=10):
@@ -13,11 +11,13 @@ class BasePage:
         self.driver.implicitly_wait(timeout)
         self.url = url
 
+
     def open(self):
         self.driver.get(self.url)
 
     def click_on_elem(self, by, selector):
         self.driver.find_element(by, selector).click()
+
 
     def get_text(self, by, selector):
         var = self.driver.find_element(by, selector).text

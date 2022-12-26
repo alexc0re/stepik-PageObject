@@ -1,5 +1,6 @@
 from selenium.webdriver.common.by import By
 from pages.locators import MainPageLocators
+from pages.locators import LoginPageLocators
 from pages.locators import BasketPageLocators
 from pages.base_page import BasePage
 from pages.login_page import LoginPage
@@ -9,12 +10,22 @@ class MainPage(BasePage):
     def __init__(self, *args, **kwargs):
         super(MainPage, self).__init__(*args, **kwargs)
 
-    def find_and_click_basket_button(self):
-        self.is_element_present(*MainPageLocators.BASKET_BUTTON)
-        self.click_on_elem(*MainPageLocators.BASKET_BUTTON)
 
-    def check_is_button_empty(self):
-        expected_result = "Your basket is empty"
-        actual_result = self.get_text(BasketPageLocators.EMPTY_BASKET)
-        assert expected_result == actual_result, f'Failed, expected : {expected_result} but got: {actual_result}'
+    def go_to_login_page(self):
+        login_link = self.driver.find_element(*LoginPageLocators.LOGIN_LINK)
+        login_link.click()
+        try:
+            alert = self.driver.switch_to.alert
+            alert.accept()
+        except:
+            pass
+        return LoginPage(driver=self.driver, url=self.driver.current_url)
+
+    def should_be_login_link(self):
+        assert self.is_element_present(*MainPageLocators.LOGIN_LINK), "Login link is not presented"
+
+
+
+
+
 
