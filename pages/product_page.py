@@ -1,5 +1,6 @@
 from pages.base_page import BasePage
 from pages.locators import ProductPageLocators
+from pages.locators import LoginPageLocators
 
 
 class ProductPage(BasePage):
@@ -10,6 +11,11 @@ class ProductPage(BasePage):
     def find_and_click_btn(self):
         self.is_element_present(*ProductPageLocators.ADD_TO_BASKET_BTN)
         self.click_on_elem(*ProductPageLocators.ADD_TO_BASKET_BTN)
+
+
+    def find_and_click_login_button(self):
+        self.is_element_present(*LoginPageLocators.LOGIN_LINK)
+        self.click_on_elem(*LoginPageLocators.LOGIN_LINK)
 
     def get_success_message_text(self):
         item_message = self.get_text(*ProductPageLocators.SUCCESS_MESSAGE_ITEM)
@@ -24,3 +30,19 @@ class ProductPage(BasePage):
 
         assert item_name == item_msg, f'{item_name} is not in : {item_msg}'
         assert item_price in price_msg, f'{item_name} is not in : {item_msg}'
+
+    def should_not_be_success_message(self):
+        assert self.is_not_element_present(*ProductPageLocators.SUCCESS_MESSAGE_ITEM), \
+            "Success message is presented, but should not be"
+
+    def should_be_dissapeares(self):
+        assert self.is_disappeared(ProductPageLocators.SUCCESS_MESSAGE_ITEM),\
+        "Element is active "
+
+    def test_guest_should_see_login_link_on_product_page(driver):
+        link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
+        page = ProductPage(driver, link)
+        page.open()
+        page.should_be_login_link()
+
+
