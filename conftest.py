@@ -27,7 +27,7 @@ def pytest_addoption(parser):
 
 
 
-@pytest.fixture(scope="session")
+@pytest.fixture(scope="function")
 def driver(request):
     driver_mode = request.config.getoption('browser_mode')
     driver_lang = request.config.getoption("language")

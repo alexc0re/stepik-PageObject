@@ -5,9 +5,9 @@ from pages.locators import LoginPageLocators
 
 class ProductPage(BasePage):
 
+
+
     def add_to_cart(self):
-
-
         assert True
 
     def find_and_click_btn(self):
@@ -40,6 +40,8 @@ class ProductPage(BasePage):
     def should_be_dissapeares(self):
          self.is_disappeared(*ProductPageLocators.SUCCESS_MESSAGE_ITEM),\
         "Element is active "
+
+
 
 
 

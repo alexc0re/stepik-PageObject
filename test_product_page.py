@@ -4,6 +4,35 @@ from pages.product_page import ProductPage
 from pages.main_page import MainPage
 from pages.base_page import BasePage
 from pages.basket_page import BasketPage
+from pages.login_page import LoginPage
+
+
+class TestUserAddToBasketFromProductPage():
+    @pytest.fixture(scope="function", autouse=True)
+    def setup(self, driver):
+        link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/"
+        page = LoginPage(driver, link)
+        page.open()
+        email = str(time.time()) + "@fakemail.org"
+        password = str(time.time())
+        page.go_to_login_page()
+        page.register_new_user(email, password)
+        page.should_be_authorized_user()
+
+    @pytest.mark.need_review
+    def test_user_cant_see_success_message(self, driver):
+        link = 'https://selenium1py.pythonanywhere.com/ru/catalogue/hacking-exposed-wireless_208/'
+        page = ProductPage(driver, link)
+        page.open()
+        page.should_not_be_success_message()
+
+    @pytest.mark.need_review
+    def test_user_can_add_product_to_basket(self, driver):
+        link = 'https://selenium1py.pythonanywhere.com/ru/catalogue/hacking-exposed-wireless_208/'
+        page = ProductPage(driver, link)
+        page.open()  # открываем страницу
+        page.find_and_click_btn()
+        page.check_adding_to_basket()
 
 
 @pytest.mark.parametrize('link', ["http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer0",
@@ -36,11 +65,14 @@ def test_guest_cant_see_success_message_after_adding_product_to_basket(driver):
     page.find_and_click_btn()
     page.should_not_be_success_message()
 
+
+@pytest.mark.need_review
 def test_guest_cant_see_success_message(driver):
     link = 'https://selenium1py.pythonanywhere.com/ru/catalogue/hacking-exposed-wireless_208/'
     page = ProductPage(driver, link)
     page.open()
     page.should_not_be_success_message()
+
 
 def test_message_disappeared_after_adding_product_to_basket(driver):
     link = 'https://selenium1py.pythonanywhere.com/ru/catalogue/hacking-exposed-wireless_208/'
@@ -49,12 +81,15 @@ def test_message_disappeared_after_adding_product_to_basket(driver):
     page.find_and_click_btn()
     page.should_be_dissapeares()
 
+
 def test_guest_should_see_login_link_on_product_page(driver):
     link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
     page = BasePage(driver, link)
     page.open()
     page.should_be_login_link()
 
+
+@pytest.mark.need_review
 def test_guest_can_go_to_login_page_from_product_page(driver):
     link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
     base_page = BasePage(driver, link)
@@ -71,4 +106,3 @@ def test_guest_cant_see_product_in_basket_opened_from_product_page(driver):
     basket_page = BasketPage(driver, link)
     base_page.open()
     basket_page.go_to_basket()
-
